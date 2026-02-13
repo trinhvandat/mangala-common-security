@@ -29,25 +29,33 @@ public class AuthorizationResult {
     private long evaluationTimeMs;
 
     public static AuthorizationResult allow(String matchedRule) {
-        return AuthorizationResult.builder()
-                .decision(Decision.ALLOW)
-                .matchedRule(matchedRule)
-                .build();
+        return new AuthorizationResult(
+                Decision.ALLOW,
+                null,
+                null,
+                matchedRule,
+                0L
+        );
     }
 
     public static AuthorizationResult deny(String reason, Set<String> requiredPermissions) {
-        return AuthorizationResult.builder()
-                .decision(Decision.DENY)
-                .reason(reason)
-                .requiredPermissions(requiredPermissions)
-                .build();
+        return new AuthorizationResult(
+                Decision.DENY,
+                reason,
+                requiredPermissions,
+                null,
+                0L
+        );
     }
 
     public static AuthorizationResult noPolicy(String path) {
-        return AuthorizationResult.builder()
-                .decision(Decision.NO_POLICY)
-                .reason("No policy rule found for path: " + path)
-                .build();
+        return new AuthorizationResult(
+                Decision.NO_POLICY,
+                "No policy rule found for path: " + path,
+                null,
+                null,
+                0L
+        );
     }
 
     public boolean isAllowed() {
