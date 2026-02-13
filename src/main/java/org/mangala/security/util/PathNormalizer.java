@@ -31,7 +31,7 @@ public final class PathNormalizer {
 
         try {
             // Decode URL encoding
-            String decoded = URLDecoder.decode(path, StandardCharsets.UTF_8);
+            String decoded = URLDecoder.decode(path, StandardCharsets.UTF_8.name());
 
             // Remove double slashes
             decoded = decoded.replaceAll("//+", "/");
@@ -66,7 +66,7 @@ public final class PathNormalizer {
 
         String decoded;
         try {
-            decoded = URLDecoder.decode(path, StandardCharsets.UTF_8);
+            decoded = URLDecoder.decode(path, StandardCharsets.UTF_8.name());
         } catch (Exception e) {
             decoded = path;
         }
